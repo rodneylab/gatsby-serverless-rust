@@ -75,7 +75,7 @@ export default function Home({ data }) {
         url: '.netlify/functions/get-contrast-ratios',
         method: 'POST',
         data: {
-          currentColours,
+          colours: currentColours,
         },
       });
       setContrastRatios(response.data.contrastRatios);
