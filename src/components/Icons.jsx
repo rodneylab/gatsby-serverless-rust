@@ -1,9 +1,14 @@
-import React from 'react';
 import FeatherIcon from 'feather-icons-react';
+import React from 'react';
 
 export const CameraIcon = () => (
   <span role="img" aria-label="camera">
     <FeatherIcon icon="camera" size="96" />
+  </span>
+);
+export const CrossIcon = () => (
+  <span role="img" aria-label="cross">
+    <FeatherIcon icon="x" size="32" />
   </span>
 );
 export const EmailIcon = () => (
@@ -34,6 +39,11 @@ export const LinkedinIcon = () => (
 export const TelegramIcon = () => (
   <span role="img" aria-label="telegram">
     <FeatherIcon icon="send" />
+  </span>
+);
+export const TickIcon = () => (
+  <span role="img" aria-label="tick">
+    <FeatherIcon icon="check" size="32" />
   </span>
 );
 export const TwitterIcon = () => (

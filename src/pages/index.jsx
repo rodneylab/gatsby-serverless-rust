@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { Form, Formik } from 'formik';
-import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import FormikErrorFocus from '../components/FormikErrorFocus';
+import { CrossIcon, TickIcon } from '../components/Icons';
 import TextInputField from '../components/InputField';
 import { PureLayout as Layout } from '../components/Layout';
 import { PureSEO as SEO } from '../components/SEO';
@@ -11,9 +11,17 @@ import {
   colourGrid,
   colourGridElement,
   colourGridElementContent,
+  colourText,
+  colourTextLowContrast,
+  contrastRatioContainer,
+  contrastRatioContainerLowContrast,
+  contrastRatioText,
   formContainer,
   formContent,
+  rowLabel,
 } from './index.module.scss';
+
+const MIN_CONTRAST_RATIO = 4.5;
 
 const validColour = (colour) => /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i.test(colour);
 
@@ -130,7 +138,7 @@ export default function Home({ data }) {
               <FormikErrorFocus>
                 <Form className={formContainer} id="colour-form" name="colour">
                   <div className={formContent}>
-                    {colours.map((element, index) => (
+                    {colours.map((_, index) => (
                       <TextInputField
                         isRequired={false}
                         id={`colour-${index}`}
@@ -154,25 +162,53 @@ export default function Home({ data }) {
             )}
           </Formik>
           <div className={colourGrid}>
-            {colours.map((outerElement, outerIndex) =>
-              colours.map((innerElement, innerIndex) => (
-                <div
-                  className={colourGridElement}
-                  key={`${innerElement}-${outerElement}`}
-                  style={{
-                    gridArea: `area-${outerIndex}-${innerIndex}`,
+            {currentColours.map((outerElement, outerIndex) => (
+              <>
+                <div className={rowLabel} style={{ gridArea: `area-row-start-${outerIndex}` }}>
+                  {outerElement}
+                </div>
+                {currentColours.map((innerElement, innerIndex) => {
+                  const contrastRatio = getContrastRatio({
                     color: innerElement,
                     backgroundColor: outerElement,
-                  }}
-                >
-                  <div className={colourGridElementContent}>
-                    {getContrastRatio({ color: innerElement, backgroundColor: outerElement })}
-                    <p>{innerElement}</p>
-                    {/* <p>bg: {outerElement}</p> */}
-                  </div>
-                </div>
-              )),
-            )}
+                  }).toFixed(1);
+
+                  return (
+                    <div
+                      className={colourGridElement}
+                      key={`${innerElement}-${outerElement}`}
+                      style={{
+                        gridArea: `area-${outerIndex}-${innerIndex}`,
+                        color: innerElement,
+                        backgroundColor: outerElement,
+                      }}
+                    >
+                      <div className={colourGridElementContent}>
+                        <div
+                          className={`${contrastRatioContainer}${
+                            contrastRatio < MIN_CONTRAST_RATIO
+                              ? ` ${contrastRatioContainerLowContrast}`
+                              : ''
+                          }`}
+                        >
+                          <span className={contrastRatioText}>{contrastRatio} </span>
+                          {contrastRatio > MIN_CONTRAST_RATIO ? <TickIcon /> : <CrossIcon />}
+                        </div>
+                        <p>
+                          <span
+                            className={`${colourText}${
+                              contrastRatio < MIN_CONTRAST_RATIO ? ` ${colourTextLowContrast}` : ''
+                            }`}
+                          >
+                            {innerElement}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </>
+            ))}
           </div>
         </>
       </Layout>

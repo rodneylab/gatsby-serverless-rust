@@ -1,0 +1,55 @@
+@import '../styles/styles.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: $spacing-4;
+  align-items: center;
+}
+
+.label-field-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.field {
+  background-color: $color-theme-3;
+  border: $spacing-px-2 solid $color-theme-4;
+  box-shadow: $spacing-0 $spacing-0 $spacing-1 $spacing-0
+    adjust-color($color: $color-theme-3, $alpha: 0.2);
+  border-radius: $spacing-1;
+  color: $color-theme-4;
+  margin-left: auto;
+  padding: $spacing-1 $spacing-2;
+}
+
+label {
+  padding-right: $spacing-4;
+}
+
+input {
+  width: 6rem;
+}
+
+input[name='overlayText'] {
+  width: 100%;
+}
+
+input[type='number'] {
+  width: 5rem;
+}
+
+.error-text {
+  padding-top: $spacing-1;
+  color: $color-danger;
+  width: 100%;
+}
+
+@media screen and (max-width: $desktop-breakpoint) {
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
