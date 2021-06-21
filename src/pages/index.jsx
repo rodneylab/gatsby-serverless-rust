@@ -27,6 +27,7 @@ const MIN_CONTRAST_RATIO = 4.5;
 const validColour = (colour) => /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i.test(colour);
 
 export default function Home({ data }) {
+  const [showContrastRatios, setShowContrastRatios] = useState(false);
   const [contrastRatios, setContrastRatios] = useState([
     { color: '#ffbe0b', backgroundColor: '#fb5607', contrastRatio: 9.9 },
   ]);
@@ -88,6 +89,7 @@ export default function Home({ data }) {
         },
       });
       setContrastRatios(response.data.contrastRatios);
+      setShowContrastRatios(true);
     } catch (error) {
       if (error.response) {
         // console.log('Server responded with non 2xx code: ', error.response.data);
@@ -161,55 +163,59 @@ export default function Home({ data }) {
               </FormikErrorFocus>
             )}
           </Formik>
-          <div className={colourGrid}>
-            {currentColours.map((outerElement, outerIndex) => (
-              <>
-                <div className={rowLabel} style={{ gridArea: `area-row-start-${outerIndex}` }}>
-                  {outerElement}
-                </div>
-                {currentColours.map((innerElement, innerIndex) => {
-                  const contrastRatio = getContrastRatio({
-                    color: innerElement,
-                    backgroundColor: outerElement,
-                  }).toFixed(1);
+          {showContrastRatios ? (
+            <div className={colourGrid}>
+              {currentColours.map((outerElement, outerIndex) => (
+                <>
+                  <div className={rowLabel} style={{ gridArea: `area-row-start-${outerIndex}` }}>
+                    {outerElement}
+                  </div>
+                  {currentColours.map((innerElement, innerIndex) => {
+                    const contrastRatio = getContrastRatio({
+                      color: innerElement,
+                      backgroundColor: outerElement,
+                    }).toFixed(1);
 
-                  return (
-                    <div
-                      className={colourGridElement}
-                      key={`${innerElement}-${outerElement}`}
-                      style={{
-                        gridArea: `area-${outerIndex}-${innerIndex}`,
-                        color: innerElement,
-                        backgroundColor: outerElement,
-                      }}
-                    >
-                      <div className={colourGridElementContent}>
-                        <div
-                          className={`${contrastRatioContainer}${
-                            contrastRatio < MIN_CONTRAST_RATIO
-                              ? ` ${contrastRatioContainerLowContrast}`
-                              : ''
-                          }`}
-                        >
-                          <span className={contrastRatioText}>{contrastRatio} </span>
-                          {contrastRatio > MIN_CONTRAST_RATIO ? <TickIcon /> : <CrossIcon />}
-                        </div>
-                        <p>
-                          <span
-                            className={`${colourText}${
-                              contrastRatio < MIN_CONTRAST_RATIO ? ` ${colourTextLowContrast}` : ''
+                    return (
+                      <div
+                        className={colourGridElement}
+                        key={`${innerElement}-${outerElement}`}
+                        style={{
+                          gridArea: `area-${outerIndex}-${innerIndex}`,
+                          color: innerElement,
+                          backgroundColor: outerElement,
+                        }}
+                      >
+                        <div className={colourGridElementContent}>
+                          <div
+                            className={`${contrastRatioContainer}${
+                              contrastRatio < MIN_CONTRAST_RATIO
+                                ? ` ${contrastRatioContainerLowContrast}`
+                                : ''
                             }`}
                           >
-                            {innerElement}
-                          </span>
-                        </p>
+                            <span className={contrastRatioText}>{contrastRatio} </span>
+                            {contrastRatio > MIN_CONTRAST_RATIO ? <TickIcon /> : <CrossIcon />}
+                          </div>
+                          <p>
+                            <span
+                              className={`${colourText}${
+                                contrastRatio < MIN_CONTRAST_RATIO
+                                  ? ` ${colourTextLowContrast}`
+                                  : ''
+                              }`}
+                            >
+                              {innerElement}
+                            </span>
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
-              </>
-            ))}
-          </div>
+                    );
+                  })}
+                </>
+              ))}
+            </div>
+          ) : null}
         </>
       </Layout>
     </>
