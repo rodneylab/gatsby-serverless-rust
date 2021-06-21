@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Form, Formik } from 'formik';
+import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import FormikErrorFocus from '../components/FormikErrorFocus';
@@ -87,14 +88,13 @@ export default function Home({ data }) {
         },
       });
       setContrastRatios(response.data.contrastRatios);
-      console.log('contrastRatios: ', contrastRatios);
     } catch (error) {
       if (error.response) {
-        console.log('Server responded with non 2xx code: ', error.response.data);
+        // console.log('Server responded with non 2xx code: ', error.response.data);
       } else if (error.request) {
-        console.log('No response received: ', error.request);
+        // console.log('No response received: ', error.request);
       } else {
-        console.log('Error setting up response: ', error.message);
+        // console.log('Error setting up response: ', error.message);
       }
     }
   };
