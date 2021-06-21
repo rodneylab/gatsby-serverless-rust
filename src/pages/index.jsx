@@ -58,7 +58,7 @@ export default function Home({ data }) {
       contrastRatios.find(
         (element) => element.color === backgroundColor && element.backgroundColor === color,
       );
-    return result?.contrastRatio || 0.0;
+    return result?.contrastRatio || 1.0;
   };
 
   const handleColourChange = (event, { index, setErrors }) => {
@@ -175,7 +175,6 @@ export default function Home({ data }) {
                       color: innerElement,
                       backgroundColor: outerElement,
                     }).toFixed(1);
-
                     return (
                       <div
                         className={colourGridElement}
@@ -186,29 +185,31 @@ export default function Home({ data }) {
                           backgroundColor: outerElement,
                         }}
                       >
-                        <div className={colourGridElementContent}>
-                          <div
-                            className={`${contrastRatioContainer}${
-                              contrastRatio < MIN_CONTRAST_RATIO
-                                ? ` ${contrastRatioContainerLowContrast}`
-                                : ''
-                            }`}
-                          >
-                            <span className={contrastRatioText}>{contrastRatio} </span>
-                            {contrastRatio > MIN_CONTRAST_RATIO ? <TickIcon /> : <CrossIcon />}
-                          </div>
-                          <p>
-                            <span
-                              className={`${colourText}${
+                        {innerIndex === outerIndex ? null : (
+                          <div className={colourGridElementContent}>
+                            <div
+                              className={`${contrastRatioContainer}${
                                 contrastRatio < MIN_CONTRAST_RATIO
-                                  ? ` ${colourTextLowContrast}`
+                                  ? ` ${contrastRatioContainerLowContrast}`
                                   : ''
                               }`}
                             >
-                              {innerElement}
-                            </span>
-                          </p>
-                        </div>
+                              <span className={contrastRatioText}>{contrastRatio} </span>
+                              {contrastRatio > MIN_CONTRAST_RATIO ? <TickIcon /> : <CrossIcon />}
+                            </div>
+                            <p>
+                              <span
+                                className={`${colourText}${
+                                  contrastRatio < MIN_CONTRAST_RATIO
+                                    ? ` ${colourTextLowContrast}`
+                                    : ''
+                                }`}
+                              >
+                                {innerElement}
+                              </span>
+                            </p>
+                          </div>
+                        )}
                       </div>
                     );
                   })}
