@@ -33,14 +33,6 @@ input {
   width: 6rem;
 }
 
-input[name='overlayText'] {
-  width: 100%;
-}
-
-input[type='number'] {
-  width: 5rem;
-}
-
 .error-text {
   padding-top: $spacing-1;
   color: $color-danger;
