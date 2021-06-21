@@ -1,0 +1,48 @@
+@import '../styles/styles.scss';
+
+.form-container {
+
+}
+
+.form-content {
+
+}
+
+.colour-grid {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	grid-template-areas: 'area-0-0 area-0-1 area-0-2 area-0-3 area-0-4 area-0-5 area-0-6'
+	'area-1-0 area-1-1 area-1-2 area-1-3 area-1-4 area-1-5 area-1-6'
+	'area-2-0 area-2-1 area-2-2 area-2-3 area-2-4 area-2-5 area-2-6'
+	'area-3-0 area-3-1 area-3-2 area-3-3 area-3-4 area-3-5 area-3-6'
+	'area-4-0 area-4-1 area-4-2 area-4-3 area-4-4 area-4-5 area-4-6'
+	'area-5-0 area-5-1 area-5-2 area-5-3 area-5-4 area-5-5 area-5-6'
+	'area-6-0 area-6-1 area-6-2 area-6-3 area-6-4 area-6-5 area-6-6';
+	border: $spacing-px solid #000;
+}
+
+.colour-grid-element {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	place-items: stretch;
+	border: $spacing-px solid #fff;
+
+
+}
+
+.colour-grid > .colour-grid-element::before {
+	content: '';
+	display: inline-block;
+	width: 1px;
+	height: 0;
+	padding-bottom: 100%;
+}
+
+.colour-grid-element-content {
+	p {
+		color: #fff;
+		background: rgba($color: #000000, $alpha: 0.5);
+		text-align: center;
+	}
+}
