@@ -8,7 +8,7 @@ build: ## Build static binary and put itin the functions directory.
 	@cargo install --force cargo-strip
 	@cargo strip --target x86_64-unknown-linux-musl
 	@mkdir -p netlify/functions
-	@cp target/x86_64-unknown-linux-musl/release/rainbow netlify/functions
+	@cp target/x86_64-unknown-linux-musl/release/get-contrast-ratios netlify/functions
 
 deploy: build ## Deploy the site using Netlify's CLI
 	@netlify deploy --prod
