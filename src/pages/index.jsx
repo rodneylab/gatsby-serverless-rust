@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Form, Formik } from 'formik';
-import { graphql } from 'gatsby';
+import { graphql, navigate } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import FormikErrorFocus from '../components/FormikErrorFocus';
@@ -8,6 +8,7 @@ import { CrossIcon, TickIcon } from '../components/Icons';
 import TextInputField from '../components/InputField';
 import { PureLayout as Layout } from '../components/Layout';
 import { PureSEO as SEO } from '../components/SEO';
+import { isBrowser } from '../utilities/utilities';
 import {
   colourGrid,
   colourGridElement,
@@ -19,7 +20,7 @@ import {
   contrastRatioText,
   formContainer,
   formContent,
-  rowLabel,
+  rowLabel
 } from './index.module.scss';
 
 const MIN_CONTRAST_RATIO = 4.5;
@@ -90,13 +91,16 @@ export default function Home({ data }) {
       });
       setContrastRatios(response.data.contrastRatios);
       setShowContrastRatios(true);
+      if (isBrowser) {
+        navigate('/#colour-grid');
+      }
     } catch (error) {
       if (error.response) {
-        // console.log('Server responded with non 2xx code: ', error.response.data);
+        console.log('Server responded with non 2xx code: ', error.response.data);
       } else if (error.request) {
-        // console.log('No response received: ', error.request);
+        console.log('No response received: ', error.request);
       } else {
-        // console.log('Error setting up response: ', error.message);
+        console.log('Error setting up response: ', error.message);
       }
     }
   };
@@ -164,7 +168,7 @@ export default function Home({ data }) {
             )}
           </Formik>
           {showContrastRatios ? (
-            <div className={colourGrid}>
+            <div id="colour-grid" className={colourGrid}>
               {currentColours.map((outerElement, outerIndex) => (
                 <>
                   <div className={rowLabel} style={{ gridArea: `area-row-start-${outerIndex}` }}>
@@ -237,6 +241,5 @@ export const query = graphql`
       ...LayoutFragment
       ...SEOFragment
     }
-    ...BlogRollFragment
   }
 `;
