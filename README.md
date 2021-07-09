@@ -11,11 +11,13 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8a509be0-69a1-4ba9-9e7e-8d1bf7836c55/deploy-status)](https://app.netlify.com/sites/silly-shaw-cbc5f6/deploys)
 
-# gatsby-functions-netlify
+# gatsby-serverless-rust
 
-See the [Use Serverless Rust with Netlify Functions blog post on the Rodney Lab site](https://rodneylab.com/use-serverless-rust-with-netlify-functions/) for more on how to set this site up. There is a live demo at [gatsby-serverless-rust.rodneylab.com](https://gatsby-serverless-rust.rodneylab.com/).
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/rodneylab/gatsby-serverless-rust)
 
-Please drop questions into a comment at the bottom of that page. Here's the quick start:
+See the [Use Serverless Rust with Netlify Functions blog post on the Rodney Lab site](https://rodneylab.com/use-serverless-rust-with-netlify-functions/) for more on how to set this site up. Please drop questions into a comment at the bottom of that page. There is a live demo at [gatsby-serverless-rust.rodneylab.com](https://gatsby-serverless-rust.rodneylab.com/).
+
+Here's the quick start:
 
 ## Creating a project
 
