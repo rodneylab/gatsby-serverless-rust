@@ -9,7 +9,8 @@
   Gatsby Serverless Rust
 </h1>
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8a509be0-69a1-4ba9-9e7e-8d1bf7836c55/deploy-status)](https://app.netlify.com/sites/silly-shaw-cbc5f6/deploys)
+> **Warning**
+> This repo is no longer maintained and is not recommended for use. There may security vulnerabilities in dependencies.
 
 # gatsby-serverless-rust
 
