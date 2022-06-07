@@ -10,7 +10,7 @@
 </h1>
 
 > **Warning**
-> This repo is no longer maintained and is not recommended for use. There may security vulnerabilities in dependencies.
+> This repo is no longer maintained and is not recommended for use. There may be security vulnerabilities in dependencies.
 
 # gatsby-serverless-rust
 
